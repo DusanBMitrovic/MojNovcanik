@@ -6,23 +6,24 @@ namespace MojNovcanik.Domen
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Mesto")]
-    public partial class Mesto
+    public partial class kategorija_transakcije
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Mesto()
+        public kategorija_transakcije()
         {
-            Korisniks = new HashSet<Korisnik>();
+            transakcijas = new HashSet<transakcija>();
         }
 
         [Key]
-        public int mesto_id { get; set; }
+        public int kategorija_id { get; set; }
 
         [Required]
         [StringLength(100)]
         public string naziv { get; set; }
 
+        public bool arhivirana { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Korisnik> Korisniks { get; set; }
+        public virtual ICollection<transakcija> transakcijas { get; set; }
     }
 }

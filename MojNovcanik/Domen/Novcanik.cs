@@ -1,29 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MojNovcanik.Domen
 {
-    class Novcanik
-    {
-        int id;
-        string naziv;
-        double bilans;
-        int vlasnikID;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
-        public Novcanik(int id, string naziv, double bilans, int vlasnikID)
+    [Table("novcanik")]
+    public partial class novcanik
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public novcanik()
         {
-            this.Id = id;
-            this.Naziv = naziv;
-            this.Bilans = bilans;
-            this.VlasnikID = vlasnikID;
+            transakcijas = new HashSet<transakcija>();
         }
 
-        public int Id { get => id; set => id = value; }
-        public string Naziv { get => naziv; set => naziv = value; }
-        public double Bilans { get => bilans; set => bilans = value; }
-        public int VlasnikID { get => vlasnikID; set => vlasnikID = value; }
+        [Key]
+        public int novcanik_id { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string naziv { get; set; }
+
+        public decimal bilans { get; set; }
+
+        public int korisnik_id { get; set; }
+
+        public virtual Korisnik Korisnik { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<transakcija> transakcijas { get; set; }
     }
 }

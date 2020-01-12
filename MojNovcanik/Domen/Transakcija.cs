@@ -1,43 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MojNovcanik.Domen
-
 {
-    public enum vrstaTransakcije
-    {
-        PRIHOD, RASHOD
-    }
-    class Transakcija
-    {
-        int id;
-        double iznos;
-        DateTime datum;
-        bool ponavljanje;
-        string vremePonavljanja;
-        vrstaTransakcije vrstaTransakcije;
-        int kategorijaTransakcijeID;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
-        public Transakcija(int id, double iznos, DateTime datum, bool ponavljanje, string vremePonavljanja, vrstaTransakcije vrstaTransakcije, int kategorijaTransakcijeID)
-        {
-            this.Id = id;
-            this.Iznos = iznos;
-            this.Datum = datum;
-            this.Ponavljanje = ponavljanje;
-            this.VremePonavljanja = vremePonavljanja;
-            this.VrstaTransakcije = vrstaTransakcije;
-            this.KategorijaTransakcijeID = kategorijaTransakcijeID;
-        }
+    [Table("transakcija")]
+    public partial class transakcija
+    {
+        [Key]
+        [Column(Order = 0)]
+        public int transakcija_id { get; set; }
 
-        public int Id { get => id; set => id = value; }
-        public double Iznos { get => iznos; set => iznos = value; }
-        public DateTime Datum { get => datum; set => datum = value; }
-        public bool Ponavljanje { get => ponavljanje; set => ponavljanje = value; }
-        public string VremePonavljanja { get => vremePonavljanja; set => vremePonavljanja = value; }
-        public vrstaTransakcije VrstaTransakcije { get => vrstaTransakcije; set => vrstaTransakcije = value; }
-        public int KategorijaTransakcijeID { get => kategorijaTransakcijeID; set => kategorijaTransakcijeID = value; }
+        public decimal iznos { get; set; }
+
+        public DateTime datum { get; set; }
+
+        public bool ponavljanje { get; set; }
+
+        public DateTime? vreme_ponavljanja { get; set; }
+
+        public bool vrsta_transakcije { get; set; }
+
+        public int? kategorija_id { get; set; }
+
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int novcanik_id { get; set; }
+
+        public virtual kategorija_transakcije kategorija_transakcije { get; set; }
+
+        public virtual novcanik novcanik { get; set; }
     }
 }
