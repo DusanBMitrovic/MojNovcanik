@@ -10,7 +10,6 @@ namespace MojNovcanik.Domen
     public partial class transakcija
     {
         [Key]
-        [Column(Order = 0)]
         public int transakcija_id { get; set; }
 
         public decimal iznos { get; set; }
@@ -23,11 +22,8 @@ namespace MojNovcanik.Domen
 
         public bool vrsta_transakcije { get; set; }
 
-        public int? kategorija_id { get; set; }
+        public int kategorija_id { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int novcanik_id { get; set; }
 
         public virtual kategorija_transakcije kategorija_transakcije { get; set; }

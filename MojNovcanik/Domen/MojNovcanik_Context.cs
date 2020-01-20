@@ -21,6 +21,11 @@ namespace MojNovcanik.Domen
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<kategorija_transakcije>()
+                .HasMany(e => e.transakcijas)
+                .WithRequired(e => e.kategorija_transakcije)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Korisnik>()
                 .HasMany(e => e.novcaniks)
                 .WithRequired(e => e.Korisnik)

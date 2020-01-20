@@ -11,13 +11,16 @@ using System.Windows.Forms;
 
 namespace MojNovcanik.Forme
 {
+
     public partial class Novcanik : Form
     {
+        int novcanikId = 0;
         string imeKorisnika;
         public Novcanik(string imeKorisnika)
         {
             InitializeComponent();
             this.imeKorisnika = imeKorisnika;
+
 
             using (var db = new MojNovcanik_Context())
             {
@@ -28,6 +31,7 @@ namespace MojNovcanik.Forme
                 {
                     cmbNovcanik.Items.Add(item.naziv);
                 }
+                cmbNovcanik.SelectedIndex = 0;
             }
         }
 
@@ -55,6 +59,7 @@ namespace MojNovcanik.Forme
                             {
                                 cmbNovcanik.Items.Add(item.naziv);
                             }
+
                         }
                         catch (Exception p)
                         {
@@ -71,11 +76,95 @@ namespace MojNovcanik.Forme
 
         private void cmbNovcanik_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbNovcanik.SelectedIndex > -1)
+            using (var db = new MojNovcanik_Context())
             {
-                var novcanik = cmbNovcanik.Text;
-                MessageBox.Show(novcanik.ToString());
+
+                if (cmbNovcanik.SelectedIndex > -1)
+                {
+                    var novcanik = cmbNovcanik.Text;
+                    var idKorisnika = db.Korisniks.Where(k => k.ime == imeKorisnika).FirstOrDefault().korisnik_id;
+                    var novcanikObj = db.novcaniks.Where(n => n.korisnik_id == idKorisnika && n.naziv == novcanik).ToList();
+
+                    novcanikId = novcanikObj.FirstOrDefault().novcanik_id;
+                    lblBilans.Text = "Bilans: " + novcanikObj.FirstOrDefault().bilans;
+                    napuniTransakcije2(novcanikId);
+                }
             }
+        }
+
+        private void btnDodajTransakciju_Click(object sender, EventArgs e)
+        {
+            Transakcija transakcija = new Transakcija(novcanikId);
+            transakcija.Show();
+        }
+
+        private void napuniTransakcije(int novcanikId)
+        {
+            dataGridTransakcije.Rows.Clear();
+            dataGridTransakcije.Refresh();
+            using (var db = new MojNovcanik_Context())
+            {
+                var transakcije = db.transakcijas.Where(t => t.novcanik_id == novcanikId).ToList();
+
+
+
+                foreach (var t in transakcije)
+                {
+                    int rowId = dataGridTransakcije.Rows.Add();
+
+                    // Grab the new row!
+                    DataGridViewRow row = dataGridTransakcije.Rows[rowId];
+                    row.Cells[0].Value = t.datum;
+                    row.Cells[1].Value = t.iznos;
+                    if (t.vrsta_transakcije == false)
+                    {
+                        row.Cells[2].Value = "Rashod";
+                    }
+                    if (t.vrsta_transakcije == true)
+                    {
+                        row.Cells[2].Value = "Prihod";
+                    }
+
+                    row.Cells[3].Value = t.ponavljanje;
+                    row.Cells[4].Value = t.vreme_ponavljanja;
+                }
+
+
+            }
+
+        }
+
+        private void napuniTransakcije2(int novcanikId)
+        {
+            // dataGridTransakcije.Dock = DockStyle.Fill;
+            // dataGridTransakcije.AutoGenerateColumns = true;
+
+
+
+            using (var db = new MojNovcanik_Context())
+            {
+                var bindingList = new BindingList<transakcija>(db.transakcijas.Where(t => t.novcanik_id == novcanikId).ToList());
+                var source = new BindingSource(bindingList, null);
+                dataGridTransakcije.DataSource = source;
+
+            }
+
+            dataGridTransakcije.Columns[0].Visible = false;
+            dataGridTransakcije.Columns["kategorija_transakcije"].Visible = false;
+            dataGridTransakcije.Columns["novcanik"].Visible = false;
+
+            // Set the DataGridView control's border.
+            dataGridTransakcije.BorderStyle = BorderStyle.Fixed3D;
+
+            // Put the cells in edit mode when user enters them.
+            dataGridTransakcije.EditMode = DataGridViewEditMode.EditOnEnter;
+
+        }
+
+        private void btnRefreshTransakcije_Click(object sender, EventArgs e)
+        {
+
+            napuniTransakcije2(novcanikId);
         }
     }
 }
