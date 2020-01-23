@@ -114,6 +114,15 @@ namespace MojNovcanik.Forme
                     try
                     {
                         db.transakcijas.Add(transakcija);
+                        novcanik novcanik = db.novcaniks.Where(n => n.novcanik_id == novcanikId).FirstOrDefault();
+                        if(transakcija.vrsta_transakcije == true)
+                        {
+                            novcanik.bilans = novcanik.bilans + transakcija.iznos;
+                        }
+                        else
+                        {
+                            novcanik.bilans = novcanik.bilans - transakcija.iznos;
+                        }
                         db.SaveChanges();
                         MessageBox.Show("Uspesno ste sacuvali transakciju !");
                     }

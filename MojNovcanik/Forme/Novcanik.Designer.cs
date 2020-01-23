@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbNovcanik = new System.Windows.Forms.ComboBox();
             this.btnDodajNovacnik = new System.Windows.Forms.Button();
@@ -38,7 +39,21 @@
             this.dataGridTransakcije = new System.Windows.Forms.DataGridView();
             this.btnDodajTransakciju = new System.Windows.Forms.Button();
             this.btnRefreshTransakcije = new System.Windows.Forms.Button();
+            this.moj_novcanikDataSet = new MojNovcanik.moj_novcanikDataSet();
+            this.kategorijatransakcijeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.kategorija_transakcijeTableAdapter = new MojNovcanik.moj_novcanikDataSetTableAdapters.kategorija_transakcijeTableAdapter();
+            this.mojnovcanikDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iznos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vrsta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ponavljanje = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vremePonavljanja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnIzmeniTransakciju = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTransakcije)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moj_novcanikDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kategorijatransakcijeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mojnovcanikDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -105,7 +120,14 @@
             // dataGridTransakcije
             // 
             this.dataGridTransakcije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTransakcije.Location = new System.Drawing.Point(137, 148);
+            this.dataGridTransakcije.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.datum,
+            this.iznos,
+            this.vrsta,
+            this.ponavljanje,
+            this.vremePonavljanja});
+            this.dataGridTransakcije.Location = new System.Drawing.Point(150, 148);
             this.dataGridTransakcije.Name = "dataGridTransakcije";
             this.dataGridTransakcije.Size = new System.Drawing.Size(544, 221);
             this.dataGridTransakcije.TabIndex = 7;
@@ -130,11 +152,77 @@
             this.btnRefreshTransakcije.UseVisualStyleBackColor = true;
             this.btnRefreshTransakcije.Click += new System.EventHandler(this.btnRefreshTransakcije_Click);
             // 
+            // moj_novcanikDataSet
+            // 
+            this.moj_novcanikDataSet.DataSetName = "moj_novcanikDataSet";
+            this.moj_novcanikDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // kategorijatransakcijeBindingSource
+            // 
+            this.kategorijatransakcijeBindingSource.DataMember = "kategorija_transakcije";
+            this.kategorijatransakcijeBindingSource.DataSource = this.moj_novcanikDataSet;
+            // 
+            // kategorija_transakcijeTableAdapter
+            // 
+            this.kategorija_transakcijeTableAdapter.ClearBeforeFill = true;
+            // 
+            // mojnovcanikDataSetBindingSource
+            // 
+            this.mojnovcanikDataSetBindingSource.DataSource = this.moj_novcanikDataSet;
+            this.mojnovcanikDataSetBindingSource.Position = 0;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // datum
+            // 
+            this.datum.HeaderText = "Datum";
+            this.datum.Name = "datum";
+            this.datum.ReadOnly = true;
+            // 
+            // iznos
+            // 
+            this.iznos.HeaderText = "Iznos";
+            this.iznos.Name = "iznos";
+            this.iznos.ReadOnly = true;
+            // 
+            // vrsta
+            // 
+            this.vrsta.HeaderText = "Vrsta";
+            this.vrsta.Name = "vrsta";
+            this.vrsta.ReadOnly = true;
+            // 
+            // ponavljanje
+            // 
+            this.ponavljanje.HeaderText = "Ponavljanje";
+            this.ponavljanje.Name = "ponavljanje";
+            this.ponavljanje.ReadOnly = true;
+            // 
+            // vremePonavljanja
+            // 
+            this.vremePonavljanja.HeaderText = "Vreme Ponavljanja";
+            this.vremePonavljanja.Name = "vremePonavljanja";
+            this.vremePonavljanja.ReadOnly = true;
+            // 
+            // btnIzmeniTransakciju
+            // 
+            this.btnIzmeniTransakciju.Location = new System.Drawing.Point(262, 104);
+            this.btnIzmeniTransakciju.Name = "btnIzmeniTransakciju";
+            this.btnIzmeniTransakciju.Size = new System.Drawing.Size(131, 23);
+            this.btnIzmeniTransakciju.TabIndex = 10;
+            this.btnIzmeniTransakciju.Text = "Izmeni Transakciju";
+            this.btnIzmeniTransakciju.UseVisualStyleBackColor = true;
+            this.btnIzmeniTransakciju.Click += new System.EventHandler(this.btnIzmeniTransakciju_Click);
+            // 
             // Novcanik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnIzmeniTransakciju);
             this.Controls.Add(this.btnRefreshTransakcije);
             this.Controls.Add(this.btnDodajTransakciju);
             this.Controls.Add(this.dataGridTransakcije);
@@ -147,7 +235,11 @@
             this.Controls.Add(this.label1);
             this.Name = "Novcanik";
             this.Text = "Novcanik";
+            this.Load += new System.EventHandler(this.Novcanik_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTransakcije)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.moj_novcanikDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kategorijatransakcijeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mojnovcanikDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +257,16 @@
         private System.Windows.Forms.DataGridView dataGridTransakcije;
         private System.Windows.Forms.Button btnDodajTransakciju;
         private System.Windows.Forms.Button btnRefreshTransakcije;
+        private moj_novcanikDataSet moj_novcanikDataSet;
+        private System.Windows.Forms.BindingSource kategorijatransakcijeBindingSource;
+        private moj_novcanikDataSetTableAdapters.kategorija_transakcijeTableAdapter kategorija_transakcijeTableAdapter;
+        private System.Windows.Forms.BindingSource mojnovcanikDataSetBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn datum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iznos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vrsta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ponavljanje;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vremePonavljanja;
+        private System.Windows.Forms.Button btnIzmeniTransakciju;
     }
 }

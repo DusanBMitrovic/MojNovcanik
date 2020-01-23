@@ -87,7 +87,7 @@ namespace MojNovcanik.Forme
 
                     novcanikId = novcanikObj.FirstOrDefault().novcanik_id;
                     lblBilans.Text = "Bilans: " + novcanikObj.FirstOrDefault().bilans;
-                    napuniTransakcije2(novcanikId);
+                    napuniTransakcije(novcanikId);
                 }
             }
         }
@@ -114,19 +114,20 @@ namespace MojNovcanik.Forme
 
                     // Grab the new row!
                     DataGridViewRow row = dataGridTransakcije.Rows[rowId];
-                    row.Cells[0].Value = t.datum;
-                    row.Cells[1].Value = t.iznos;
+                    row.Cells[0].Value = t.transakcija_id;
+                    row.Cells[1].Value = t.datum;
+                    row.Cells[2].Value = t.iznos;
                     if (t.vrsta_transakcije == false)
                     {
-                        row.Cells[2].Value = "Rashod";
+                        row.Cells[3].Value = "Rashod";
                     }
                     if (t.vrsta_transakcije == true)
                     {
-                        row.Cells[2].Value = "Prihod";
+                        row.Cells[3].Value = "Prihod";
                     }
 
-                    row.Cells[3].Value = t.ponavljanje;
-                    row.Cells[4].Value = t.vreme_ponavljanja;
+                    row.Cells[4].Value = t.ponavljanje;
+                    row.Cells[5].Value = t.vreme_ponavljanja;
                 }
 
 
@@ -144,13 +145,25 @@ namespace MojNovcanik.Forme
             using (var db = new MojNovcanik_Context())
             {
                 var bindingList = new BindingList<transakcija>(db.transakcijas.Where(t => t.novcanik_id == novcanikId).ToList());
+                foreach (var item in bindingList)
+                {
+                    kategorija_transakcije kategorija = new kategorija_transakcije();
+                    kategorija.kategorija_id = item.kategorija_id;
+
+                    kategorija.naziv = db.kategorija_transakcije.Where(k => k.kategorija_id == item.kategorija_id).FirstOrDefault().naziv;
+                    kategorija.arhivirana = false;
+                    item.kategorija_transakcije = kategorija;
+                    item.kategorija_transakcije.ToString();
+                }
                 var source = new BindingSource(bindingList, null);
                 dataGridTransakcije.DataSource = source;
 
             }
 
+
+
             dataGridTransakcije.Columns[0].Visible = false;
-            dataGridTransakcije.Columns["kategorija_transakcije"].Visible = false;
+            // dataGridTransakcije.Columns["kategorija_transakcije"].Visible = false;
             dataGridTransakcije.Columns["novcanik"].Visible = false;
 
             // Set the DataGridView control's border.
@@ -161,10 +174,61 @@ namespace MojNovcanik.Forme
 
         }
 
-        private void btnRefreshTransakcije_Click(object sender, EventArgs e)
+        private void napuniTransakcije3(int novcanikId)
         {
+            // dataGridTransakcije.Dock = DockStyle.Fill;
+            // dataGridTransakcije.AutoGenerateColumns = true;
 
-            napuniTransakcije2(novcanikId);
+
+
+            using (var db = new MojNovcanik_Context())
+            {
+                var bindingList = new BindingList<transakcija>(db.transakcijas.Where(t => t.novcanik_id == novcanikId).ToList());
+                foreach (var item in bindingList)
+                {
+                    kategorija_transakcije kategorija = new kategorija_transakcije();
+                    kategorija.kategorija_id = item.kategorija_id;
+
+                    kategorija.naziv = db.kategorija_transakcije.Where(k => k.kategorija_id == item.kategorija_id).FirstOrDefault().naziv;
+                    kategorija.arhivirana = false;
+                    item.kategorija_transakcije = kategorija;
+                    item.kategorija_transakcije.ToString();
+                }
+                var source = new BindingSource(bindingList, null);
+                // dataGridTransakcije.DataSource = source;
+
+            }
+        }
+
+            private void btnRefreshTransakcije_Click(object sender, EventArgs e)
+        {
+            using (var db = new MojNovcanik_Context())
+            {
+
+                if (cmbNovcanik.SelectedIndex > -1)
+                {
+                    var novcanik = cmbNovcanik.Text;
+                    var idKorisnika = db.Korisniks.Where(k => k.ime == imeKorisnika).FirstOrDefault().korisnik_id;
+                    var novcanikObj = db.novcaniks.Where(n => n.korisnik_id == idKorisnika && n.naziv == novcanik).ToList();
+
+                    novcanikId = novcanikObj.FirstOrDefault().novcanik_id;
+                    lblBilans.Text = "Bilans: " + novcanikObj.FirstOrDefault().bilans;
+                    napuniTransakcije(novcanikId);
+                }
+            }
+        }
+
+        private void Novcanik_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'moj_novcanikDataSet.kategorija_transakcije' table. You can move, or remove it, as needed.
+            this.kategorija_transakcijeTableAdapter.Fill(this.moj_novcanikDataSet.kategorija_transakcije);
+
+        }
+
+        private void btnIzmeniTransakciju_Click(object sender, EventArgs e)
+        {
+            IzmeniTransakciju izmeniTransakciju = new IzmeniTransakciju(novcanikId);
+            izmeniTransakciju.ShowDialog();
         }
     }
 }

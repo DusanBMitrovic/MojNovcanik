@@ -70,6 +70,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forme\IzmeniTransakciju.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forme\IzmeniTransakciju.Designer.cs">
+      <DependentUpon>IzmeniTransakciju.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forme\Novcanik.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,11 +94,19 @@
     <Compile Include="Forme\Transakcija.Designer.cs">
       <DependentUpon>Transakcija.cs</DependentUpon>
     </Compile>
+    <Compile Include="moj_novcanikDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>moj_novcanikDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Pomocnik\Validacija.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forme\IzmeniTransakciju.resx">
+      <DependentUpon>IzmeniTransakciju.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forme\Novcanik.resx">
       <DependentUpon>Novcanik.cs</DependentUpon>
@@ -112,6 +126,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="moj_novcanikDataSet.xsc">
+      <DependentUpon>moj_novcanikDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="moj_novcanikDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>moj_novcanikDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="moj_novcanikDataSet.xss">
+      <DependentUpon>moj_novcanikDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
