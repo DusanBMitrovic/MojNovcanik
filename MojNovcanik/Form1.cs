@@ -41,6 +41,7 @@ namespace MojNovcanik
                     else
                     {
                         Novcanik novcanik = new Novcanik(txtImeP.Text.Trim());
+                        this.Hide();
                         novcanik.Show();
                     }
                 }

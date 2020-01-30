@@ -41,6 +41,7 @@
             this.checkBoxPonavljanje = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbKategorija = new System.Windows.Forms.ComboBox();
+            this.btnSacuvaj = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -163,11 +164,22 @@
             this.cmbKategorija.Size = new System.Drawing.Size(121, 21);
             this.cmbKategorija.TabIndex = 11;
             // 
+            // btnSacuvaj
+            // 
+            this.btnSacuvaj.Location = new System.Drawing.Point(90, 411);
+            this.btnSacuvaj.Name = "btnSacuvaj";
+            this.btnSacuvaj.Size = new System.Drawing.Size(75, 23);
+            this.btnSacuvaj.TabIndex = 12;
+            this.btnSacuvaj.Text = "Sacuvaj";
+            this.btnSacuvaj.UseVisualStyleBackColor = true;
+            this.btnSacuvaj.Click += new System.EventHandler(this.btnSacuvaj_Click);
+            // 
             // IzmeniTransakciju
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnSacuvaj);
             this.Controls.Add(this.cmbKategorija);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkBoxPonavljanje);
@@ -204,5 +216,6 @@
         private System.Windows.Forms.CheckBox checkBoxPonavljanje;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbKategorija;
+        private System.Windows.Forms.Button btnSacuvaj;
     }
 }

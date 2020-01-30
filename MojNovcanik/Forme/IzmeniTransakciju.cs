@@ -111,5 +111,60 @@ namespace MojNovcanik.Forme
                 }
             
         }
+
+        private void btnSacuvaj_Click(object sender, EventArgs e)
+        {
+            using (var db = new MojNovcanik_Context())
+            {
+                try
+                {
+                    int transakcijaToChangeID = Int32.Parse(cmbTransakcijeID.Text);
+                var transakcija = db.transakcijas.Where(t => t.transakcija_id == transakcijaToChangeID).FirstOrDefault();
+
+
+                transakcija.iznos = Int32.Parse(txtIznosTransakcije.Text);
+                if (checkPrihod.Checked == true)
+                {
+                    transakcija.vrsta_transakcije = true;
+                }
+                else
+                {
+                    transakcija.vrsta_transakcije = false;
+                }
+
+                if (checkBoxPonavljanje.Checked == true)
+                {
+                    transakcija.ponavljanje = true;
+                }
+                else
+                {
+                    transakcija.ponavljanje = false;
+                }
+
+                transakcija.vreme_ponavljanja = dateTimePicker1.Value;
+
+                transakcija.kategorija_id = db.kategorija_transakcije.Where(k => k.naziv == cmbKategorija.Text).FirstOrDefault().kategorija_id;
+
+                
+                    
+                    novcanik novcanik = db.novcaniks.Where(n => n.novcanik_id == novcanikId).FirstOrDefault();
+                    if (transakcija.vrsta_transakcije == true)
+                    {
+                        novcanik.bilans = novcanik.bilans + transakcija.iznos;
+                    }
+                    else
+                    {
+                        novcanik.bilans = novcanik.bilans - transakcija.iznos;
+                    }
+                    db.SaveChanges();
+                    MessageBox.Show("Uspesno ste sacuvali transakciju !");
+                }
+                catch (Exception p)
+                {
+                    MessageBox.Show("Doslo je do greske, pokusajte ponovo malo kasnije ");
+                }
+
+            }
+        }
     }
 }
