@@ -41,8 +41,8 @@ namespace MojNovcanik.Forme
                 foreach (var item in lista)
                 {
                     cmbTransakcijeID.Items.Add(item.transakcija_id);
+                    cmbTransakcijeID.SelectedIndex = 0;
                 }
-                cmbTransakcijeID.SelectedIndex = 0;
             }
         }
 

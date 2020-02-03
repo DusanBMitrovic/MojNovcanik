@@ -21,17 +21,25 @@ namespace MojNovcanik.Forme
             InitializeComponent();
             this.imeKorisnika = imeKorisnika;
 
+            lblUlogovaniKorisnik.Text = this.imeKorisnika;
 
             using (var db = new MojNovcanik_Context())
             {
 
                 cmbNovcanik.Items.Clear();
                 var lista = db.novcaniks.ToList();
+
+                var korisnikId = db.Korisniks.Where(k => k.ime == this.imeKorisnika).FirstOrDefault().korisnik_id;
+
                 foreach (var item in lista)
                 {
-                    cmbNovcanik.Items.Add(item.naziv);
+                    if (item.korisnik_id == korisnikId)
+                    {
+                        cmbNovcanik.Items.Add(item.naziv);
+                        cmbNovcanik.SelectedIndex = 0;
+                    }
                 }
-                cmbNovcanik.SelectedIndex = 0;
+                
             }
         }
 
@@ -85,17 +93,29 @@ namespace MojNovcanik.Forme
                     var idKorisnika = db.Korisniks.Where(k => k.ime == imeKorisnika).FirstOrDefault().korisnik_id;
                     var novcanikObj = db.novcaniks.Where(n => n.korisnik_id == idKorisnika && n.naziv == novcanik).ToList();
 
-                    novcanikId = novcanikObj.FirstOrDefault().novcanik_id;
-                    lblBilans.Text = "Bilans: " + novcanikObj.FirstOrDefault().bilans;
-                    napuniTransakcije(novcanikId);
+                    if(novcanikObj.Count > 0)
+                    {
+                        novcanikId = novcanikObj.FirstOrDefault().novcanik_id;
+                        lblBilans.Text = "Bilans: " + novcanikObj.FirstOrDefault().bilans;
+                        napuniTransakcije(novcanikId);
+                    }
                 }
             }
         }
 
         private void btnDodajTransakciju_Click(object sender, EventArgs e)
         {
-            Transakcija transakcija = new Transakcija(novcanikId);
-            transakcija.Show();
+
+            if(cmbNovcanik.Text != "")
+            {
+                Transakcija transakcija = new Transakcija(novcanikId);
+                transakcija.Show();
+            }
+            else
+            {
+                MessageBox.Show("Morate izabrati novcanik");
+            }
+
         }
 
         private void napuniTransakcije(int novcanikId)

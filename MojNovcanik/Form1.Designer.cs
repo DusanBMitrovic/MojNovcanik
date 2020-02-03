@@ -35,27 +35,30 @@
             this.btnPrijaviSe = new System.Windows.Forms.Button();
             this.btnRegistrujSe = new System.Windows.Forms.Button();
             this.lblObavestenja = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 79);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(39, 126);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(24, 13);
+            this.label1.Size = new System.Drawing.Size(30, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Ime";
             // 
             // txtImeP
             // 
-            this.txtImeP.Location = new System.Drawing.Point(121, 76);
+            this.txtImeP.Location = new System.Drawing.Point(121, 123);
             this.txtImeP.Name = "txtImeP";
             this.txtImeP.Size = new System.Drawing.Size(100, 20);
             this.txtImeP.TabIndex = 1;
             // 
             // txtSifraP
             // 
-            this.txtSifraP.Location = new System.Drawing.Point(121, 131);
+            this.txtSifraP.Location = new System.Drawing.Point(121, 178);
             this.txtSifraP.Name = "txtSifraP";
             this.txtSifraP.Size = new System.Drawing.Size(100, 20);
             this.txtSifraP.TabIndex = 2;
@@ -63,15 +66,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 138);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(39, 181);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.Size = new System.Drawing.Size(37, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Sifra";
             // 
             // btnPrijaviSe
             // 
-            this.btnPrijaviSe.Location = new System.Drawing.Point(350, 76);
+            this.btnPrijaviSe.Location = new System.Drawing.Point(42, 245);
             this.btnPrijaviSe.Name = "btnPrijaviSe";
             this.btnPrijaviSe.Size = new System.Drawing.Size(75, 23);
             this.btnPrijaviSe.TabIndex = 4;
@@ -81,7 +85,7 @@
             // 
             // btnRegistrujSe
             // 
-            this.btnRegistrujSe.Location = new System.Drawing.Point(350, 133);
+            this.btnRegistrujSe.Location = new System.Drawing.Point(146, 245);
             this.btnRegistrujSe.Name = "btnRegistrujSe";
             this.btnRegistrujSe.Size = new System.Drawing.Size(75, 23);
             this.btnRegistrujSe.TabIndex = 5;
@@ -92,14 +96,36 @@
             // lblObavestenja
             // 
             this.lblObavestenja.AutoSize = true;
-            this.lblObavestenja.Location = new System.Drawing.Point(185, 227);
+            this.lblObavestenja.Location = new System.Drawing.Point(39, 213);
             this.lblObavestenja.Name = "lblObavestenja";
             this.lblObavestenja.Size = new System.Drawing.Size(0, 13);
             this.lblObavestenja.TabIndex = 6;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(101, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Moj Novčanik";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 71);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(280, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Popunite potrebne podatke za prijavljivanje";
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(747, 307);
+            this.ClientSize = new System.Drawing.Size(304, 307);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lblObavestenja);
             this.Controls.Add(this.btnRegistrujSe);
             this.Controls.Add(this.btnPrijaviSe);
@@ -122,6 +148,8 @@
         private System.Windows.Forms.Button btnPrijaviSe;
         private System.Windows.Forms.Button btnRegistrujSe;
         private System.Windows.Forms.Label lblObavestenja;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

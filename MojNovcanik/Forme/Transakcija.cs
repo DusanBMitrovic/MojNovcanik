@@ -27,8 +27,8 @@ namespace MojNovcanik.Forme
                 foreach (var item in lista)
                 {
                     cmbKategorija.Items.Add(item.naziv);
+                    cmbKategorija.SelectedIndex = 0;
                 }
-                cmbKategorija.SelectedIndex = 0;
             }
             this.novcanikId = novcanikId;
         }
@@ -128,7 +128,7 @@ namespace MojNovcanik.Forme
                     }
                     catch (Exception p)
                     {
-                        MessageBox.Show("Doslo je do greske, pokusajte ponovo malo kasnije ", p.InnerException.ToString());
+                        MessageBox.Show("Doslo je do greske, pokusajte ponovo malo kasnije ");
                     }
 
                 }
