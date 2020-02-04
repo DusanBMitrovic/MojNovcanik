@@ -80,6 +80,10 @@ namespace MojNovcanik.Forme
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Morate uneti naziv novcanika");
+            }
         }
 
         private void cmbNovcanik_SelectedIndexChanged(object sender, EventArgs e)
@@ -247,8 +251,18 @@ namespace MojNovcanik.Forme
 
         private void btnIzmeniTransakciju_Click(object sender, EventArgs e)
         {
-            IzmeniTransakciju izmeniTransakciju = new IzmeniTransakciju(novcanikId);
-            izmeniTransakciju.ShowDialog();
+
+            if (dataGridTransakcije.Rows.Count == 0 || cmbNovcanik.SelectedIndex < 0)
+            {
+                MessageBox.Show("Jos uvek nemate sta da izmenite!");
+            }
+            else
+            {
+                IzmeniTransakciju izmeniTransakciju = new IzmeniTransakciju(novcanikId);
+                izmeniTransakciju.ShowDialog();
+
+            }
+
         }
     }
 }

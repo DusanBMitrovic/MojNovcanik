@@ -23,11 +23,18 @@ namespace MojNovcanik.Forme
             {
 
                 cmbKategorija.Items.Clear();
+                cmbKategorijaArhiviranje.Items.Clear();
                 var lista = db.kategorija_transakcije.ToList();
                 foreach (var item in lista)
                 {
-                    cmbKategorija.Items.Add(item.naziv);
-                    cmbKategorija.SelectedIndex = 0;
+                    if (item.arhivirana == false)
+                    {
+                        cmbKategorijaArhiviranje.Items.Add(item.naziv);
+                        cmbKategorijaArhiviranje.SelectedIndex = 0;
+
+                        cmbKategorija.Items.Add(item.naziv);
+                        cmbKategorija.SelectedIndex = 0;
+                    }
                 }
             }
             this.novcanikId = novcanikId;
@@ -42,26 +49,42 @@ namespace MojNovcanik.Forme
                     kategorija_transakcije kategorija = new kategorija_transakcije();
                     kategorija.naziv = txtDodajKategoriju.Text.Trim();
                     kategorija.arhivirana = false;
-                    try
+
+                    if (db.kategorija_transakcije.Where(k => k.naziv == kategorija.naziv).ToList().Count > 0)
                     {
-                        db.kategorija_transakcije.Add(kategorija);
+                        MessageBox.Show("Kategorija sa tim nazivom vec postoji. Ukoliko je bila arhivirana, sada je ponovo aktivna!");
+                        db.kategorija_transakcije.Where(k => k.naziv == kategorija.naziv).FirstOrDefault().arhivirana = false;
                         db.SaveChanges();
-                        MessageBox.Show("Uspesno sacuvana transakcija");
                     }
-                    catch (Exception)
+                    else
                     {
-                        MessageBox.Show("Greska");
+                        try
+                        {
+                            db.kategorija_transakcije.Add(kategorija);
+                            db.SaveChanges();
+                            MessageBox.Show("Uspesno dodata kategorija transakcije");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Greska");
+                        }
                     }
-
-
 
                     cmbKategorija.Items.Clear();
+                    cmbKategorijaArhiviranje.Items.Clear();
                     var lista = db.kategorija_transakcije.ToList();
                     foreach (var item in lista)
                     {
-                        cmbKategorija.Items.Add(item.naziv);
+                        if (item.arhivirana == false)
+                        {
+                            cmbKategorijaArhiviranje.Items.Add(item.naziv);
+                            cmbKategorijaArhiviranje.SelectedIndex = 0;
+
+                            cmbKategorija.Items.Add(item.naziv);
+                            cmbKategorija.SelectedIndex = 0;
+                        }
                     }
-                    MessageBox.Show("Uspesno dodata kategorija transakcije");
+
                 }
                 else
                 {
@@ -134,7 +157,7 @@ namespace MojNovcanik.Forme
                 }
                 else
                 {
-
+                    MessageBox.Show("Morate uneti iznos transakcije");
                 }
             }
         }
@@ -150,6 +173,42 @@ namespace MojNovcanik.Forme
                     idKategorije = db.kategorija_transakcije.Where(k => k.naziv == kategorija).FirstOrDefault().kategorija_id;
                     
                 }
+            }
+        }
+
+        private void btnArhivirajKategoriju_Click(object sender, EventArgs e)
+        {
+            if (cmbKategorijaArhiviranje.SelectedIndex > -1)
+            {
+                using (var db = new MojNovcanik_Context())
+                {
+                    kategorija_transakcije kategorija = db.kategorija_transakcije.Where(k => k.naziv == cmbKategorijaArhiviranje.Text).FirstOrDefault();
+
+                    kategorija.arhivirana = true;
+                    db.SaveChanges();
+                    MessageBox.Show("Uspesno ste arhivirali kategoriju transakcije");
+
+                    cmbKategorija.Items.Clear();
+                    cmbKategorijaArhiviranje.Items.Clear();
+                    var lista = db.kategorija_transakcije.ToList();
+                    foreach (var item in lista)
+                    {
+                        if (item.arhivirana == false)
+                        {
+                            cmbKategorijaArhiviranje.Items.Add(item.naziv);
+                            cmbKategorijaArhiviranje.SelectedIndex = 0;
+
+                            cmbKategorija.Items.Add(item.naziv);
+                            cmbKategorija.SelectedIndex = 0;
+                        }
+                    }
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("Morate odabrati kategoriju koju zelite da arhivirate");
             }
         }
     }

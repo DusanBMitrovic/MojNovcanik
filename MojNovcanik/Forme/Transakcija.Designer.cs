@@ -45,9 +45,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbKategorijaArhiviranje = new System.Windows.Forms.ComboBox();
+            this.btnArhivirajKategoriju = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -143,10 +149,13 @@
             // 
             // cmbKategorija
             // 
+            this.cmbKategorija.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbKategorija.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbKategorija.FormattingEnabled = true;
             this.cmbKategorija.Location = new System.Drawing.Point(88, 322);
             this.cmbKategorija.Name = "cmbKategorija";
             this.cmbKategorija.Size = new System.Drawing.Size(121, 21);
+            this.cmbKategorija.Sorted = true;
             this.cmbKategorija.TabIndex = 9;
             this.cmbKategorija.SelectedIndexChanged += new System.EventHandler(this.cmbKategorija_SelectedIndexChanged);
             // 
@@ -224,11 +233,65 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Dodavanje nove kategorije";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(375, 218);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(155, 20);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Arhiviranje kategorije";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnArhivirajKategoriju);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.cmbKategorijaArhiviranje);
+            this.groupBox4.Location = new System.Drawing.Point(379, 254);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(271, 124);
+            this.groupBox4.TabIndex = 17;
+            this.groupBox4.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(16, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(76, 17);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Kategorija:";
+            // 
+            // cmbKategorijaArhiviranje
+            // 
+            this.cmbKategorijaArhiviranje.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbKategorijaArhiviranje.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbKategorijaArhiviranje.FormattingEnabled = true;
+            this.cmbKategorijaArhiviranje.Location = new System.Drawing.Point(98, 33);
+            this.cmbKategorijaArhiviranje.Name = "cmbKategorijaArhiviranje";
+            this.cmbKategorijaArhiviranje.Size = new System.Drawing.Size(121, 21);
+            this.cmbKategorijaArhiviranje.Sorted = true;
+            this.cmbKategorijaArhiviranje.TabIndex = 13;
+            // 
+            // btnArhivirajKategoriju
+            // 
+            this.btnArhivirajKategoriju.Location = new System.Drawing.Point(106, 83);
+            this.btnArhivirajKategoriju.Name = "btnArhivirajKategoriju";
+            this.btnArhivirajKategoriju.Size = new System.Drawing.Size(113, 23);
+            this.btnArhivirajKategoriju.TabIndex = 9;
+            this.btnArhivirajKategoriju.Text = "Arhiviraj Kategoriji";
+            this.btnArhivirajKategoriju.UseVisualStyleBackColor = true;
+            this.btnArhivirajKategoriju.Click += new System.EventHandler(this.btnArhivirajKategoriju_Click);
+            // 
             // Transakcija
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 483);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -241,6 +304,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +330,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnArhivirajKategoriju;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbKategorijaArhiviranje;
     }
 }

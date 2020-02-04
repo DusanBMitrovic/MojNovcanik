@@ -76,6 +76,8 @@
             // 
             // cmbNovcanik
             // 
+            this.cmbNovcanik.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbNovcanik.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbNovcanik.FormattingEnabled = true;
             this.cmbNovcanik.Location = new System.Drawing.Point(148, 26);
             this.cmbNovcanik.Name = "cmbNovcanik";
@@ -130,6 +132,7 @@
             // 
             // dataGridTransakcije
             // 
+            this.dataGridTransakcije.AllowUserToAddRows = false;
             this.dataGridTransakcije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridTransakcije.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,

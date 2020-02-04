@@ -55,9 +55,12 @@ namespace MojNovcanik.Forme
                 var lista = db.kategorija_transakcije.ToList();
                 foreach (var item in lista)
                 {
-                    cmbKategorija.Items.Add(item.naziv);
+                    if (item.arhivirana == false)
+                    {
+                        cmbKategorija.Items.Add(item.naziv);
+                        cmbKategorija.SelectedIndex = 0;
+                    }
                 }
-                cmbKategorija.SelectedIndex = 0;
                 transakcijaId = Int32.Parse(cmbTransakcijeID.Text);
                 transakcija = db.transakcijas.Where(t => t.transakcija_id == transakcijaId).FirstOrDefault();
                 napuniPodatkeTransakcije();

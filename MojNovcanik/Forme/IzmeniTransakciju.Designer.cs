@@ -166,6 +166,8 @@
             // 
             // cmbKategorija
             // 
+            this.cmbKategorija.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbKategorija.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbKategorija.FormattingEnabled = true;
             this.cmbKategorija.Location = new System.Drawing.Point(436, 206);
             this.cmbKategorija.Name = "cmbKategorija";
